@@ -1,6 +1,7 @@
 #!/bin/sh
 set -e
 
+# shellcheck disable=SC2112
 function main() {
   sanitize "${INPUT_ACCESS_KEY_ID}" "access_key_id"
   sanitize "${INPUT_SECRET_ACCESS_KEY}" "secret_access_key"
@@ -10,6 +11,7 @@ function main() {
 
   ACCOUNT_URL="$INPUT_ACCOUNT_ID.dkr.ecr.$INPUT_REGION.amazonaws.com"
 
+  aws --version
   aws_configure
   login
   docker_build $INPUT_TAGS $ACCOUNT_URL
@@ -32,7 +34,7 @@ function aws_configure() {
 
 function login() {
   echo "== START LOGIN"
-  LOGIN_COMMAND=$(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+  LOGIN_COMMAND=$(aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $ACCOUNT_URL)
   $LOGIN_COMMAND
   echo "== FINISHED LOGIN"
 }
