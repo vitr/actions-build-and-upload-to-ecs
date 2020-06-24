@@ -1,11 +1,4 @@
-FROM docker:19.03.10
-
-RUN apk update \
-  && apk upgrade \
-  && apk add --no-cache --update python py-pip coreutils \
-  && rm -rf /var/cache/apk/* \
-  && pip install awscli \
-  && apk --purge -v del py-pip
+FROM amazon/aws-cli:2.0.25
 
 ADD entrypoint.sh /entrypoint.sh
 
