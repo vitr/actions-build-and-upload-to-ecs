@@ -1,4 +1,4 @@
-name: Docker Build and Upload to AWS
+name: Docker Build and Upload to AWS ECR
 author: vitr <vit@vitr.com.au>
 branding:
   icon: upload-cloud
