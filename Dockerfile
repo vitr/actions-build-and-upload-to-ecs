@@ -4,7 +4,6 @@ RUN apk add --update --no-cache curl py-pip
 
 RUN apk update \
   && apk upgrade \
-  && apk add --no-cache --update python py-pip coreutils \
   && rm -rf /var/cache/apk/* \
   && pip install awscli \
   && apk --purge -v del py-pip
