@@ -1,5 +1,7 @@
 FROM docker:19.03.4
 
+RUN apk add --update --no-cache curl py-pip
+
 RUN apk update \
   && apk upgrade \
   && apk add --no-cache --update python py-pip coreutils \
