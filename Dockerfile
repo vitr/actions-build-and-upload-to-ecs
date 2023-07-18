@@ -1,12 +1,6 @@
 FROM docker:24.0.4
 
-RUN apk add --update --no-cache curl py-pip
-
-RUN apk update \
-  && apk upgrade \
-  && rm -rf /var/cache/apk/* \
-  && pip install awscli \
-  && apk --purge -v del py-pip
+RUN apk add --no-cache aws-cli
 
 ADD entrypoint.sh /entrypoint.sh
 
