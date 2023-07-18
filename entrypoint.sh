@@ -32,7 +32,7 @@ function aws_configure() {
 
 function login() {
   echo "== START LOGIN"
-  LOGIN_COMMAND=$(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+  LOGIN_COMMAND=$(aws ecr get-login-password --no-include-email --region $AWS_DEFAULT_REGION)
   $LOGIN_COMMAND
   echo "== FINISHED LOGIN"
 }
