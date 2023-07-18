@@ -32,8 +32,8 @@ function aws_configure() {
 
 function login() {
   echo "== START LOGIN"
-  LOGIN_COMMAND=$(aws ecr get-login-password --region $AWS_DEFAULT_REGION)
-  $LOGIN_COMMAND
+  LOGIN_PASSWORD=$(aws ecr get-login-password --region $AWS_DEFAULT_REGION)
+  echo "$LOGIN_PASSWORD" | docker login --username AWS --password-stdin $ACCOUNT_URL
   echo "== FINISHED LOGIN"
 }
 
