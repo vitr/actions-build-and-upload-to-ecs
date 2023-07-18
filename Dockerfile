@@ -1,4 +1,4 @@
-FROM docker:19.03.4
+FROM docker:24.0.4
 
 RUN apk add --update --no-cache curl py-pip
 
