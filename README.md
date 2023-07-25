@@ -1,6 +1,6 @@
 # actions-build-and-upload-to-ecs
 
-This Action allows you to create Docker images and push into a ECR repository.
+This action creates a Docker image and uploads it to the Amazon Elastic Container Registry (Amazon ECR) repository.
 
 ## Parameters
 | Parameter | Type | Default | Description |
