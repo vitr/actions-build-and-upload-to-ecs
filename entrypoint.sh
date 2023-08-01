@@ -69,10 +69,12 @@ function docker_buildx() {
   done
 
   docker buildx build $INPUT_EXTRA_BUILD_ARGS -f $INPUT_DOCKERFILE $docker_tag_args \
-    --cache-to type=gha,max \
+    --cache-to type=gha,mode=max \
     --cache-from type=gha \
     $INPUT_PATH
   echo "== FINISHED DOCKERIZE BUILDX"
+
+
 }
 
 function docker_push_to_ecr() {
