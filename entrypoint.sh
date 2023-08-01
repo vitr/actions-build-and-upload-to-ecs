@@ -68,6 +68,7 @@ function docker_buildx() {
     docker_tag_args="$docker_tag_args -t $2/$INPUT_REPO:$tag"
   done
 
+  docker buildx create --use
   docker buildx build $INPUT_EXTRA_BUILD_ARGS -f $INPUT_DOCKERFILE $docker_tag_args \
     --cache-to type=gha,mode=max \
     --cache-from type=gha \
