@@ -69,7 +69,7 @@ function docker_buildx() {
   done
 
   docker buildx create --use
-  docker buildx build $INPUT_EXTRA_BUILD_ARGS -f $INPUT_DOCKERFILE $docker_tag_args \
+  docker buildx build --push $INPUT_EXTRA_BUILD_ARGS -f $INPUT_DOCKERFILE $docker_tag_args \
     --cache-to type=gha,mode=max \
     --cache-from type=gha \
     $INPUT_PATH
