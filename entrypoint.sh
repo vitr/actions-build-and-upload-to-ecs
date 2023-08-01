@@ -12,7 +12,7 @@ function main() {
 
   aws_configure
   login
-  docker_build $INPUT_TAGS $ACCOUNT_URL
+  docker_buildx $INPUT_TAGS $ACCOUNT_URL
   create_ecr_repo $INPUT_CREATE_REPO
   docker_push_to_ecr $INPUT_TAGS $ACCOUNT_URL
 }
@@ -57,6 +57,22 @@ function docker_build() {
 
   docker build $INPUT_EXTRA_BUILD_ARGS -f $INPUT_DOCKERFILE $docker_tag_args $INPUT_PATH
   echo "== FINISHED DOCKERIZE"
+}
+
+function docker_buildx() {
+  echo "== START DOCKERIZE WITH BUILDX"
+  local TAG=$1
+  local docker_tag_args=""
+  local DOCKER_TAGS=$(echo "$TAG" | tr "," "\n")
+  for tag in $DOCKER_TAGS; do
+    docker_tag_args="$docker_tag_args -t $2/$INPUT_REPO:$tag"
+  done
+
+  docker buildx build $INPUT_EXTRA_BUILD_ARGS -f $INPUT_DOCKERFILE $docker_tag_args \
+    --cache-to type=gha,max \
+    --cache-from type=gha \
+    $INPUT_PATH
+  echo "== FINISHED DOCKERIZE BUILDX"
 }
 
 function docker_push_to_ecr() {
