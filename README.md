@@ -22,13 +22,13 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - uses: vitr/actions-build-and-upload-to-ecs@master
         with:
           access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           account_id: ${{ secrets.AWS_ACCOUNT_ID }}
-          repo: docker/repo
+          repo: aws-ecr-repo
           region: ap-northeast-2
           tags: latest,${{ github.sha }}
           create_repo: true
