@@ -1,4 +1,4 @@
-FROM docker:24.0.4
+FROM docker:25
 
 RUN apk add --no-cache aws-cli
 
